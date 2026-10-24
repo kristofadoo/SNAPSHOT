@@ -1,0 +1,53 @@
+/* SNAPSHOT interface: quiet, wide-tracked type, glass controls. --acc / --hi follow the current environment (set by art.js). */
+:root{--acc:#7fb4ff;--hi:#d6e6ff;--bg:#04060d;color-scheme:dark;
+  --font:"Syncopate","Michroma","Eurostile","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Manrope","Avenir Next","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--hi);overflow:hidden;overscroll-behavior:none;font-family:var(--body)}
+canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none;display:block}
+.ov{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;
+  padding:calc(env(safe-area-inset-top,0px) + 9vh) 28px calc(env(safe-area-inset-bottom,0px) + 6vh);pointer-events:none;
+  transition:opacity .5s ease,visibility .5s}
+.ov.hid,.hid{opacity:0;visibility:hidden}
+.ov .btn,.ov .sw,.lnk{pointer-events:auto}
+.blk{display:flex;flex-direction:column;align-items:center;gap:15px;width:100%}
+.ov:not(.hid) .blk>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.ov:not(.hid) .blk>*:nth-child(2){animation-delay:.08s}.ov:not(.hid) .blk>*:nth-child(3){animation-delay:.16s}
+.ov:not(.hid) .blk>*:nth-child(4){animation-delay:.24s}.ov:not(.hid) .blk>*:nth-child(5){animation-delay:.3s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+/* brand mark: a rotating chrome ring with a gap, the same object the game is about */
+.mark{width:58px;height:58px;border-radius:50%;margin-bottom:4px;animation:spin 16s linear infinite;
+  background:conic-gradient(from 30deg,transparent 0 58deg,#fff 58deg,#8da0c0 140deg,#0b1220 215deg,#e8f1ff 290deg,transparent 290deg 360deg);
+  -webkit-mask:radial-gradient(circle,transparent 20px,#000 21px,#000 27px,transparent 28px);mask:radial-gradient(circle,transparent 20px,#000 21px,#000 27px,transparent 28px);
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+@keyframes spin{to{transform:rotate(360deg)}}
+h1,h2{margin:0;font-family:var(--font);font-weight:700;line-height:1;text-transform:uppercase}
+h1{font-size:clamp(25px,8vmin,44px);letter-spacing:.34em;margin-right:-.34em;
+  background:linear-gradient(180deg,#fff 0%,#d3dff3 36%,#7389ad 62%,#eaf2ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.65))}
+h2{font-size:clamp(12px,3.4vmin,15px);letter-spacing:.5em;margin-right:-.5em;font-weight:400;color:rgba(214,230,255,.7)}
+.tag{margin:0;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:rgba(214,230,255,.5);font-weight:300}
+.big{margin:6px 0 0;font-family:var(--font);font-weight:400;font-size:clamp(60px,18vmin,100px);line-height:1;letter-spacing:.02em;color:#fff;text-shadow:0 0 40px rgba(127,180,255,.28)}
+.nb{margin:0;color:var(--acc);letter-spacing:.42em;margin-right:-.42em;font-weight:500;font-size:10px;font-family:var(--font)}
+.best{margin:2px 0 0;letter-spacing:.32em;font-size:10px;color:rgba(214,230,255,.55);font-family:var(--font)}.best b{color:#fff;font-weight:700;margin-left:6px}
+.hint{margin:4px 0 0;letter-spacing:.38em;font-weight:500;font-size:10px;color:var(--acc);font-family:var(--font)}
+.sub{margin:0;font-size:11px;color:rgba(214,230,255,.42);letter-spacing:.1em;display:flex;align-items:center;gap:9px;font-weight:300}
+.finger{width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(127,180,255,.5);animation:rp 2s infinite}
+@keyframes rp{to{box-shadow:0 0 0 12px rgba(127,180,255,0)}}
+.btn{min-width:min(74vw,280px);min-height:58px;padding:0 28px;border-radius:40px;cursor:pointer;touch-action:manipulation;color:#fff;
+  font-family:var(--font);font-weight:700;font-size:12px;letter-spacing:.36em;text-indent:.36em;
+  border:1px solid var(--acc);background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.03));
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.28),0 0 26px rgba(127,180,255,.14);transition:transform .15s,box-shadow .3s,border-color .6s}
+.btn:active{transform:scale(.97);box-shadow:0 6px 18px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2)}
+.btn.ghost{min-height:44px;background:transparent;border-color:rgba(214,230,255,.2);color:rgba(214,230,255,.72);font-size:9px;box-shadow:none}
+.sw-row{display:flex;gap:14px;margin-bottom:4px}
+.sw{width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.25);padding:0;cursor:pointer;position:relative}
+.sw.on{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.12),0 0 14px currentColor}.sw:disabled{opacity:.2;cursor:default}
+.stats{display:flex;gap:0;margin-bottom:8px}
+.stats div{display:flex;flex-direction:column;gap:7px;padding:0 30px}.stats div+div{border-left:1px solid rgba(214,230,255,.16)}
+.stats b{font-family:var(--font);font-weight:400;font-size:22px;color:#fff}.stats span{font-size:8px;letter-spacing:.36em;color:rgba(214,230,255,.5);font-family:var(--font)}
+#snd{position:fixed;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;min-height:36px;padding:0 12px;border-radius:18px;
+  border:1px solid rgba(214,230,255,.16);background:rgba(255,255,255,.04);color:rgba(214,230,255,.6);font:500 8px/1 var(--font);letter-spacing:.3em;cursor:pointer}
+#snd[aria-pressed=true]{opacity:.45}
+@media (max-height:620px){.ov{padding-top:calc(env(safe-area-inset-top,0px) + 5vh)}.mark{width:44px;height:44px}.btn{min-height:50px}}
